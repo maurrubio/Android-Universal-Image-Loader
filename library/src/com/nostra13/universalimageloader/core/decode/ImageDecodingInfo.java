@@ -15,9 +15,9 @@
  *******************************************************************************/
 package com.nostra13.universalimageloader.core.decode;
 
-import android.annotation.TargetApi;
 import android.graphics.BitmapFactory.Options;
 import android.os.Build;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
@@ -75,19 +75,10 @@ public class ImageDecodingInfo {
 		destOptions.inScreenDensity = srcOptions.inScreenDensity;
 		destOptions.inTargetDensity = srcOptions.inTargetDensity;
 		destOptions.inTempStorage = srcOptions.inTempStorage;
-		if (Build.VERSION.SDK_INT >= 10) copyOptions10(srcOptions, destOptions);
-		if (Build.VERSION.SDK_INT >= 11) copyOptions11(srcOptions, destOptions);
-	}
-
-	@TargetApi(10)
-	private void copyOptions10(Options srcOptions, Options destOptions) {
-		destOptions.inPreferQualityOverSpeed = srcOptions.inPreferQualityOverSpeed;
-	}
-
-	@TargetApi(11)
-	private void copyOptions11(Options srcOptions, Options destOptions) {
-		destOptions.inBitmap = srcOptions.inBitmap;
-		destOptions.inMutable = srcOptions.inMutable;
+		if (Build.VERSION.SDK_INT >= 11){
+			ImageDecodingInfoReflection.copyOptions10(srcOptions, destOptions);
+			ImageDecodingInfoReflection.copyOptions11(srcOptions, destOptions);
+		}
 	}
 
 	/** @return Original {@linkplain MemoryCacheUtil#generateKey(String, ImageSize) image key} (used in memory cache). */

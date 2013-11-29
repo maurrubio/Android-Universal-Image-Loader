@@ -15,21 +15,23 @@
  *******************************************************************************/
 package com.nostra13.universalimageloader.core.decode;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Build;
+
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme;
 import com.nostra13.universalimageloader.utils.ImageSizeUtils;
 import com.nostra13.universalimageloader.utils.IoUtils;
 import com.nostra13.universalimageloader.utils.L;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Decodes images to {@link Bitmap}, scales them to needed size
@@ -38,6 +40,7 @@ import java.io.InputStream;
  * @see ImageDecodingInfo
  * @since 1.8.3
  */
+@SuppressLint("NewApi")
 public class BaseImageDecoder implements ImageDecoder {
 
 	protected static final String LOG_SABSAMPLE_IMAGE = "Subsample original image (%1$s) to %2$s (scale = %3$d) [%4$s]";
